@@ -22,7 +22,6 @@ class MedicationListViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
     
     // MARK: - Navigation
 
@@ -30,7 +29,7 @@ class MedicationListViewController: UIViewController {
         if segue.identifier == "toEditMedicationVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destination = segue.destination as? MedicationDetailViewController else { return }
-            let medication = MedicationController.shared.medications[indexPath.row]
+            let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
             destination.medication = medication
             
         }
@@ -40,18 +39,39 @@ class MedicationListViewController: UIViewController {
 
 extension MedicationListViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        MedicationController.shared.sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MedicationController.shared.medications.count
+        return MedicationController.shared.sections[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "medicationCell", for: indexPath) as? MedicationTableViewCell else { return UITableViewCell() }
         
-        let medication = MedicationController.shared.medications[indexPath.row]
+        let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
         
         cell.congigure(with: medication)
+        cell.delegate = self
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Not Taken"
+        } else if section == 1 {
+            return "Taken"
+        }
+        return ""
+    }
+    
+}
+
+extension MedicationListViewController: MedicationCellDelegate {
+    func medicationWasTakenTapped(wasTaken: Bool, medication: Medication) {
+        MedicationController.shared.updateMedicationStatus(wasTaken, medication: medication)
+        tableView.reloadData()
+    }
 }

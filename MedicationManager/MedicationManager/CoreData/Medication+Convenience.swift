@@ -14,4 +14,24 @@ extension Medication {
         self.name = name
         self.timeOfDay = timeOfDay
     }
+    
+    func wasTakenToday() -> Bool {
+        return (takenDates as? Set<TakenDate>)?.contains(where: { takenDate in
+            guard let dateToCompare = takenDate.date else { return false }
+            
+            return Calendar.current.isDate(dateToCompare, inSameDayAs: Date())
+            
+        }) ?? false
+    }
+    
+    // MARK: - or make it a computed property
+    var wasTakenTodayP: Bool {
+        return (takenDates as? Set<TakenDate>)?.contains(where: { takenDate in
+            guard let dateToCompare = takenDate.date else { return false }
+            
+            return Calendar.current.isDate(dateToCompare, inSameDayAs: Date())
+            
+        }) ?? false
+    }
+    
 }//End Of Extensions

@@ -19,17 +19,14 @@ class MedicationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
-        // Do any additional setup after loading the view.
     }
-    
-    
     
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text, !name.isEmpty else { return }
         
         if let medication = medication {
-            MedicationController.shared.updateMedication(medication: medication, name: name, date: datePicker.date)
+            MedicationController.shared.updateMedicationDetails(medication: medication, name: name, date: datePicker.date)
         } else {
             MedicationController.shared.createMedication(name: name, timeOfDay: datePicker.date)
         }
