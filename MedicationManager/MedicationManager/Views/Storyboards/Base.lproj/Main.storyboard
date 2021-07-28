@@ -3,11 +3,97 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Mood Survey View Controller-->
+        <scene sceneID="HC1-Wb-6pQ">
+            <objects>
+                <viewController storyboardIdentifier="moodSurveyVC" id="63W-Dc-oNU" customClass="MoodSurveyViewController" customModule="MedicationManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cb4-hv-4AI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="s1e-F2-ECv">
+                                <rect key="frame" x="138.5" y="228" width="137" height="450"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQH-bJ-d4r">
+                                        <rect key="frame" x="0.0" y="0.0" width="137" height="136.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TQH-bJ-d4r" secondAttribute="height" multiplier="1:1" id="Oeh-Uk-gYF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="75"/>
+                                        <state key="normal" title="😀"/>
+                                        <connections>
+                                            <action selector="moodButtonTapped:" destination="63W-Dc-oNU" eventType="touchUpInside" id="AiL-ou-9NA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTy-0V-JeL">
+                                        <rect key="frame" x="0.0" y="156.5" width="137" height="137"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kTy-0V-JeL" secondAttribute="height" multiplier="1:1" id="UsA-oa-P8n"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="75"/>
+                                        <state key="normal" title="😐"/>
+                                        <connections>
+                                            <action selector="moodButtonTapped:" destination="63W-Dc-oNU" eventType="touchUpInside" id="AcF-Hg-DUp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GG0-KS-ddT">
+                                        <rect key="frame" x="0.0" y="313.5" width="137" height="136.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GG0-KS-ddT" secondAttribute="height" multiplier="1:1" id="ead-cZ-aiZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="75"/>
+                                        <state key="normal" title="😞"/>
+                                        <connections>
+                                            <action selector="moodButtonTapped:" destination="63W-Dc-oNU" eventType="touchUpInside" id="EwC-L5-xF4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SkO-Ge-0VL">
+                                <rect key="frame" x="16" y="60" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SkO-Ge-0VL" secondAttribute="height" multiplier="1:1" id="Iuj-vk-Rcg"/>
+                                    <constraint firstAttribute="height" constant="45" id="bzl-Bg-wDD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="xmark.circle" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="63W-Dc-oNU" eventType="touchUpInside" id="zoG-8A-MIy"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today i am feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-VU-sKV">
+                                <rect key="frame" x="122.5" y="182.5" width="169" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eHY-3k-wxe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SkO-Ge-0VL" firstAttribute="leading" secondItem="eHY-3k-wxe" secondAttribute="leading" constant="16" id="4u4-oc-XgV"/>
+                            <constraint firstItem="SkO-Ge-0VL" firstAttribute="top" secondItem="eHY-3k-wxe" secondAttribute="top" constant="16" id="C5b-c6-xry"/>
+                            <constraint firstItem="s1e-F2-ECv" firstAttribute="width" secondItem="cb4-hv-4AI" secondAttribute="width" multiplier="0.33" id="Oqd-k2-KBR"/>
+                            <constraint firstItem="RhY-VU-sKV" firstAttribute="centerX" secondItem="cb4-hv-4AI" secondAttribute="centerX" id="Tu6-fW-B7r"/>
+                            <constraint firstItem="s1e-F2-ECv" firstAttribute="centerX" secondItem="eHY-3k-wxe" secondAttribute="centerX" id="hUc-Pz-SIr"/>
+                            <constraint firstItem="s1e-F2-ECv" firstAttribute="top" secondItem="RhY-VU-sKV" secondAttribute="bottom" constant="20" id="lFA-oK-FSD"/>
+                            <constraint firstItem="s1e-F2-ECv" firstAttribute="centerY" secondItem="eHY-3k-wxe" secondAttribute="centerY" id="yW7-sd-5ar"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iNE-Xc-TlY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="889.85507246376824" y="-532.36607142857144"/>
+        </scene>
         <!--Medication List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -17,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MGQ-wS-aCL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="163" width="414" height="699"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="medicationCell" id="ylc-q2-9GA" customClass="MedicationTableViewCell" customModule="MedicationManager" customModuleProvider="target">
@@ -78,14 +164,50 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGN-QK-Mk0">
+                                <rect key="frame" x="0.0" y="88" width="414" height="75"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgI-9H-iyk">
+                                        <rect key="frame" x="338" y="7.5" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="DgI-9H-iyk" secondAttribute="height" multiplier="1:1" id="Ztz-zp-8LP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="❓"/>
+                                        <connections>
+                                            <action selector="moodSurveyButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0rU-sf-a8g"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today i am feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bza-Io-NO4">
+                                        <rect key="frame" x="16" y="16" width="306" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="DgI-9H-iyk" firstAttribute="centerY" secondItem="WGN-QK-Mk0" secondAttribute="centerY" id="2So-m5-ngc"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bza-Io-NO4" secondAttribute="bottom" constant="16" id="6QA-vf-c55"/>
+                                    <constraint firstAttribute="trailing" secondItem="DgI-9H-iyk" secondAttribute="trailing" constant="16" id="7Aj-JP-x5Q"/>
+                                    <constraint firstItem="Bza-Io-NO4" firstAttribute="top" secondItem="WGN-QK-Mk0" secondAttribute="top" constant="16" id="IG6-mA-SX3"/>
+                                    <constraint firstItem="DgI-9H-iyk" firstAttribute="leading" secondItem="Bza-Io-NO4" secondAttribute="trailing" constant="16" id="brI-r2-6hV"/>
+                                    <constraint firstItem="Bza-Io-NO4" firstAttribute="leading" secondItem="WGN-QK-Mk0" secondAttribute="leading" constant="16" id="fgB-Fp-zZd"/>
+                                    <constraint firstItem="DgI-9H-iyk" firstAttribute="height" secondItem="WGN-QK-Mk0" secondAttribute="height" multiplier="0.8" id="ngL-4T-iq8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WGN-QK-Mk0" secondAttribute="trailing" id="3zG-Pk-XCk"/>
                             <constraint firstItem="MGQ-wS-aCL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="InP-UH-I2L"/>
+                            <constraint firstItem="MGQ-wS-aCL" firstAttribute="top" secondItem="WGN-QK-Mk0" secondAttribute="bottom" id="PgF-ga-XEs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MGQ-wS-aCL" secondAttribute="bottom" id="YDB-Oc-Fax"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MGQ-wS-aCL" secondAttribute="trailing" id="b0t-yC-MK2"/>
-                            <constraint firstItem="MGQ-wS-aCL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yJx-gr-nh6"/>
+                            <constraint firstItem="WGN-QK-Mk0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hOy-dB-RRJ"/>
+                            <constraint firstItem="WGN-QK-Mk0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pLt-jO-nRO"/>
+                            <constraint firstItem="MGQ-wS-aCL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="75" id="yJx-gr-nh6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rha-kA-bqz">
@@ -96,6 +218,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="moodSurveyButton" destination="DgI-9H-iyk" id="M41-XH-yO3"/>
                         <outlet property="tableView" destination="MGQ-wS-aCL" id="WBU-k8-3ic"/>
                     </connections>
                 </viewController>
@@ -188,6 +311,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="square" catalog="system" width="128" height="114"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

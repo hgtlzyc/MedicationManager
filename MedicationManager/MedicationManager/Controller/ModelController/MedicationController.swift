@@ -11,11 +11,12 @@ class MedicationController {
     
     static let shared = MedicationController()
     
-    
     /// index 0 == notTaken, index 1 == tanken
     var sections: [[Medication]] { [notTakenMeds, takenMeds] }
     var notTakenMeds: [Medication] = []
     var takenMeds: [Medication] = []
+    
+    private let notificationScheduler = NotificationScheluler()
     
     private lazy var fetchRequest: NSFetchRequest<Medication> = {
         let request = NSFetchRequest<Medication>(entityName: "Medication")
@@ -33,6 +34,7 @@ class MedicationController {
         let medication = Medication(name: name, timeOfDay: timeOfDay)
         notTakenMeds.append(medication)
         CoreDataStack.saveContext()
+        notificationScheduler.scheduleNotification(for: medication)
     }
     
     func fetchMedication() {
@@ -41,7 +43,8 @@ class MedicationController {
         takenMeds = medications.filter{ $0.wasTakenToday() }
         notTakenMeds = medications.filter{ !$0.wasTakenToday() }
         
-        //let sections2dArr = Dictionary.init(grouping: medications) { $0.wasTakenToday() }.sorted { $0.key && !$1.key }.map{ $0.value }
+        let sections2dArr = Dictionary.init(grouping: medications) { $0.wasTakenToday() }.sorted { $0.key && !$1.key }.map{ $0.value }
+        print(sections2dArr)
         
     }
     
@@ -49,6 +52,11 @@ class MedicationController {
         medication.name = name
         medication.timeOfDay = date
         CoreDataStack.saveContext()
+        
+        if !medication.wasTakenToday() {
+            notificationScheduler.clearNotification(for: medication)
+            notificationScheduler.scheduleNotification(for: medication)
+        }
         
     }
     
@@ -58,7 +66,9 @@ class MedicationController {
             if let index = notTakenMeds.firstIndex(of: medication) {
                 notTakenMeds.remove(at: index)
                 takenMeds.append(medication)
+                notificationScheduler.clearNotification(for: medication)
             }
+            
         } else {
             let mutableTakenDates = medication.mutableSetValue(forKey: "takenDates")
             
@@ -70,6 +80,7 @@ class MedicationController {
                 if let index = takenMeds.firstIndex(of: medication){
                     takenMeds.remove(at: index)
                     notTakenMeds.append(medication)
+                    notificationScheduler.scheduleNotification(for: medication)
                 }
             }
         }

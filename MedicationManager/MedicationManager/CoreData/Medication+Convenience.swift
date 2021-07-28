@@ -13,6 +13,7 @@ extension Medication {
         self.init(context: context)
         self.name = name
         self.timeOfDay = timeOfDay
+        self.id = UUID()
     }
     
     func wasTakenToday() -> Bool {
@@ -22,6 +23,7 @@ extension Medication {
             return Calendar.current.isDate(dateToCompare, inSameDayAs: Date())
             
         }) ?? false
+        
     }
     
     // MARK: - or make it a computed property
