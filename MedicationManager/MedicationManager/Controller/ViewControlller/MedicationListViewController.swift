@@ -22,6 +22,9 @@ class MedicationListViewController: UIViewController {
         
         moodSurveyButton.setTitle(MoodSureveyController.shared.todayMoodSurevy?.mentalState ?? "❓", for: .normal)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reminderFired), name: Notification.Name(rawValue: StringConstants.reminderReceivedNotificationName), object: nil)
+        
+        
     }
     
     @IBAction func moodSurveyButtonTapped(_ sender: Any) {
@@ -38,6 +41,12 @@ class MedicationListViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    // MARK: - Helper Methods
+    @objc func reminderFired() {
+        tableView.reloadData()
+    }
+    
     
     // MARK: - Navigation
 
@@ -73,6 +82,15 @@ extension MedicationListViewController: UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
+            MedicationController.shared.deleteMedication(medication)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {

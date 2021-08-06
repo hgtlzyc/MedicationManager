@@ -8,10 +8,10 @@
 import Foundation
 
 enum StringConstants {
-    static let accept = "Accept"
+    static let accept = "Mark As Taken"
     static let addMedicationTitle = "Add Medication"
     static let emojiKey = "emoji"
-    static let ignore = "Ignore"
+    static let ignore = "Nahhh"
     static let ignoreNotificationActionIdentifier = "IgnoreNotification"
     static let mainStoryboardIdentifier = "Main"
     static let markTakenNotificationActionIdentifier = "MarkedAsTakenFromNotification"

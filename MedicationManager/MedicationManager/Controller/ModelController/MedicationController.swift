@@ -43,8 +43,8 @@ class MedicationController {
         takenMeds = medications.filter{ $0.wasTakenToday() }
         notTakenMeds = medications.filter{ !$0.wasTakenToday() }
         
-        let sections2dArr = Dictionary.init(grouping: medications) { $0.wasTakenToday() }.sorted { $0.key && !$1.key }.map{ $0.value }
-        print(sections2dArr)
+//        let sections2dArr = Dictionary.init(grouping: medications) { $0.wasTakenToday() }.sorted { $0.key && !$1.key }.map{ $0.value }
+//        print(sections2dArr)
         
     }
     
@@ -87,8 +87,22 @@ class MedicationController {
         CoreDataStack.saveContext()
     }
     
-    func deleteMedication() {
+    func markMedicationAsTanken(withID id: String) {
+        guard let uuid = UUID(uuidString: id),
+              let medication = notTakenMeds.first(where: {$0.id == uuid}) else { return }
         
+        TakenDate(date: Date(), medication: medication)
+        
+        CoreDataStack.saveContext()
+        
+    }
+    
+    func deleteMedication(_ medication: Medication) {
+        
+        CoreDataStack.context.delete(medication)
+        CoreDataStack.saveContext()
+        fetchMedication()
+        notificationScheduler.clearNotification(for: medication)
     }
     
 }

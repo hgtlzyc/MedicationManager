@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { authorized, error in
             
             if let error = error {
@@ -75,6 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }//End Of Delegate
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         NotificationCenter.default.post(name: Notification.Name(StringConstants.reminderReceivedNotificationName),
@@ -85,7 +89,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.actionIdentifier == StringConstants.markTakenNotificationActionIdentifier,
            let medicationID = response.notification.request.content.userInfo[StringConstants.medicationID] as? String {
-            MedicationController.shared
+            MedicationController.shared.markMedicationAsTanken(withID: medicationID)
+            NotificationCenter.default.post(name: Notification.Name(StringConstants.reminderReceivedNotificationName),
+                                            object: nil)
             completionHandler()
         }
     }
